@@ -342,6 +342,7 @@ raw_cell_tfms = [add_new_line, expand_include]
 # Cell
 def treat_notebook(nb, dest):
     nb['cells'] = remove_hidden_cells(nb['cells'])
+    nb['cells'] = [(expand_include(c) if c['cell_type'] == 'raw' else c) for c in nb['cells']]
     tfm_func = {'code': compose(*code_cell_tfms), 'markdown': compose(partial(extract_attachments, dest=dest), *md_cell_tfms),
                 'raw': compose(*raw_cell_tfms)}
     nb['cells'] = [tfm_func[c['cell_type']](c) for c in nb['cells']]

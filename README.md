@@ -1,4 +1,3 @@
-
 # fastdoc
 > Create publication-quality books from Jupyter notebooks
 
