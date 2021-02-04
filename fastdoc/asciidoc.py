@@ -3,12 +3,13 @@
 __all__ = ['markdown_cell', 'code_cell', 'remove_hidden_cells', 'isolate_adoc_blocks', 'replace_old_jekylls',
            'hide_input', 'hide_output', 'extract_html', 'split_max_len', 'deal_error', 'remove_interrupted_pbars',
            'get_cell_meta', 'caption_tables', 'TEXT_MAX_WIDTH', 'wrap_text_outputs', 'CODE_MAX_LEN', 'check_code_len',
-           'deal_quotes', 'add_title_level', 'deal_with_lists', 'replace_jekylls', 'interpret_sidebar',
-           'IMAGE_CONV_MULT', 'process_images', 'wrap_references', 'extract_attachments', 'sidebar_headers',
-           'code_cell_tfms', 'md_cell_tfms', 'add_new_line', 'treat_notebook', 'rep_spec_tok', 'ipython2python',
-           'remove_cells', 'clear_cells', 'format_latex', 'format_outputs', 'fix_quotes', 'fix_references',
-           'format_tables', 'remove_lines', 'post_process_tfms', 'post_process', 'c', 'exporter', 'add_metadata',
-           'output_num', 'IMAGE_OUT_MULT', 'get_output_width', 'convert_nb', 'copy_images', 'fastdoc_convert_all']
+           'deal_quotes', 'add_title_level', 'title_to_asciidoc', 'deal_with_lists', 'replace_jekylls',
+           'interpret_sidebar', 'IMAGE_CONV_MULT', 'process_images', 'wrap_references', 'extract_attachments',
+           'sidebar_headers', 'code_cell_tfms', 'md_cell_tfms', 'add_new_line', 'treat_notebook', 'rep_spec_tok',
+           'ipython2python', 'remove_cells', 'clear_cells', 'format_latex', 'format_outputs', 'fix_quotes',
+           'fix_references', 'format_tables', 'remove_lines', 'post_process_tfms', 'post_process', 'c', 'exporter',
+           'add_metadata', 'output_num', 'IMAGE_OUT_MULT', 'get_output_width', 'convert_nb', 'copy_images',
+           'fastdoc_convert_all']
 
 # Cell
 from .imports import *
@@ -196,6 +197,15 @@ def add_title_level(cell):
     return cell
 
 # Cell
+def title_to_asciidoc(cell):
+    _re_header = re.compile(r'^#+\s+\S+')
+    if _re_header.search(cell['source']) is not None:
+        src = cell['source'].lstrip('#')
+        src = ('=' * (len(cell['source']) - len(src))) + src
+        cell['source'] = src
+    return cell
+
+# Cell
 def deal_with_lists(cell):
     lines = cell['source'].split('\n')
     for i in range(len(lines)):
@@ -307,7 +317,7 @@ def sidebar_headers(cell):
 # Cell
 code_cell_tfms = [get_cell_meta, replace_old_jekylls, hide_input, hide_output, extract_html, deal_error,
                   remove_interrupted_pbars, wrap_text_outputs, caption_tables, check_code_len]
-md_cell_tfms = [deal_quotes, wrap_references, interpret_sidebar, sidebar_headers, add_title_level, deal_with_lists,
+md_cell_tfms = [deal_quotes, wrap_references, interpret_sidebar, sidebar_headers, add_title_level, title_to_asciidoc, deal_with_lists,
                 process_images, replace_jekylls]
 
 # Cell
