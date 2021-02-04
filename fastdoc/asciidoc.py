@@ -5,11 +5,11 @@ __all__ = ['markdown_cell', 'code_cell', 'remove_hidden_cells', 'isolate_adoc_bl
            'get_cell_meta', 'caption_tables', 'TEXT_MAX_WIDTH', 'wrap_text_outputs', 'CODE_MAX_LEN', 'check_code_len',
            'deal_quotes', 'add_title_level', 'title_to_asciidoc', 'deal_with_lists', 'replace_jekylls',
            'interpret_sidebar', 'IMAGE_CONV_MULT', 'process_images', 'wrap_references', 'extract_attachments',
-           'sidebar_headers', 'code_cell_tfms', 'md_cell_tfms', 'add_new_line', 'treat_notebook', 'rep_spec_tok',
-           'ipython2python', 'remove_cells', 'clear_cells', 'format_latex', 'format_outputs', 'fix_quotes',
-           'fix_references', 'format_tables', 'remove_lines', 'post_process_tfms', 'post_process', 'c', 'exporter',
-           'add_metadata', 'output_num', 'IMAGE_OUT_MULT', 'get_output_width', 'convert_nb', 'copy_images',
-           'fastdoc_convert_all']
+           'sidebar_headers', 'add_new_line', 'expand_include', 'code_cell_tfms', 'md_cell_tfms', 'raw_cell_tfms',
+           'treat_notebook', 'rep_spec_tok', 'ipython2python', 'remove_cells', 'clear_cells', 'format_latex',
+           'format_outputs', 'fix_quotes', 'fix_references', 'format_tables', 'remove_lines', 'post_process_tfms',
+           'post_process', 'c', 'exporter', 'add_metadata', 'output_num', 'IMAGE_OUT_MULT', 'get_output_width',
+           'convert_nb', 'copy_images', 'fastdoc_convert_all']
 
 # Cell
 from .imports import *
@@ -315,21 +315,35 @@ def sidebar_headers(cell):
     return cell
 
 # Cell
-code_cell_tfms = [get_cell_meta, replace_old_jekylls, hide_input, hide_output, extract_html, deal_error,
-                  remove_interrupted_pbars, wrap_text_outputs, caption_tables, check_code_len]
-md_cell_tfms = [deal_quotes, wrap_references, interpret_sidebar, sidebar_headers, add_title_level, title_to_asciidoc, deal_with_lists,
-                process_images, replace_jekylls]
-
-# Cell
 def add_new_line(cell):
     cell['source'] = '\n' + cell['source']
     return cell
 
 # Cell
+_re_include_md = re.compile(r'^#include\s+.*\.md$')
+_re_include_adoc = re.compile(r'^#include\s+.*\.(asciidoc|adoc)$')
+
+# Cell
+def expand_include(cell):
+    if _re_include_md.match(cell['source']):
+        cell['cell_type'] = 'markdown'
+        cell['source'] = open(re.compile(r'\s+').split(cell['source'])[1]).read()
+    elif _re_include_adoc.match(cell['source']):
+        cell['source'] = open(re.compile(r'\s+').split(cell['source'])[1]).read()
+    return cell
+
+# Cell
+code_cell_tfms = [get_cell_meta, replace_old_jekylls, hide_input, hide_output, extract_html, deal_error,
+                  remove_interrupted_pbars, wrap_text_outputs, caption_tables, check_code_len]
+md_cell_tfms = [deal_quotes, wrap_references, interpret_sidebar, sidebar_headers, add_title_level, title_to_asciidoc, deal_with_lists,
+                process_images, replace_jekylls]
+raw_cell_tfms = [add_new_line, expand_include]
+
+# Cell
 def treat_notebook(nb, dest):
     nb['cells'] = remove_hidden_cells(nb['cells'])
     tfm_func = {'code': compose(*code_cell_tfms), 'markdown': compose(partial(extract_attachments, dest=dest), *md_cell_tfms),
-                'raw': add_new_line}
+                'raw': compose(*raw_cell_tfms)}
     nb['cells'] = [tfm_func[c['cell_type']](c) for c in nb['cells']]
     nb['cells'] = isolate_adoc_blocks(nb['cells'])
     return nb
