@@ -211,6 +211,7 @@ def deal_with_lists(cell):
     for i in range(len(lines)):
         lines[i] = re.sub(r'(^\s*)\d*\.(.*)$', r'\1.\2xxnewl', lines[i])
         lines[i] = re.sub(r'(^\s*)-\s(.*::)\s(.*)$', r'\2xxnewls\3xxnewl', lines[i])
+        lines[i] = re.sub(r'(^\s*)-\s\*\*(.*):\*\*\s(.*)$', r'\2::xxnewls\3xxnewl', lines[i])
     cell['source'] = '\n'.join(lines)
     return cell
 
