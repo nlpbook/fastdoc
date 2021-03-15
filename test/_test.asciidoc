@@ -48,9 +48,8 @@ This should be fine
 
 In this case, there's an extremely convenient mathematical
 operation that calculates `w*x` for every row of a
-matrix–it's called _matrix multiplication_.
-<<matmul>> show what matrix multiplication looks like (diagram
-from Wikipedia).
+matrix–it's called _matrix multiplication_. <> show what
+matrix multiplication looks like (diagram from Wikipedia).
 
 This notebook shows all the special syntax to use to write the book.
 
@@ -288,17 +287,12 @@ Here as well you need to use asciidoc syntax.
 Another way to have sidebars is to delimit it between headers cells like
 this (headers need to be in a cell of their own for this to work).
 
-
-.Another intervention
-****
-
+==== Sidebar: Another intervention
 
 All of this will be inside the sidebar. You use normal markdown syntax
 in this block, and can have code cells or images.
 
-
-****
-
+==== End sidebar
 
 To write directly in asciidoc, you can use a raw cell or a triple quote
 enviromnent flagged with `asciidoc`
@@ -389,8 +383,8 @@ and id are all interpreted properly.
 image::puppy.jpg["Alternative text", 420]
 
 
-Use `<< >>` for references (asciidoc syntax). This is a reference
-to the puppy in <<puppy>> before.
+Use `<< >>` for references (asciidoc syntax). This is a reference to the
+puppy in <> before.
 
 To add a label, caption, alternative text or width to an image output,
 use the following flags
@@ -406,7 +400,7 @@ PILImage.create(fnames[0])
 
 [[puppy1]]
 .This is an image
-image::_test_files/output_66_0.png["A cute little doggy", 160]
+image::_test_files/output_62_0.png["A cute little doggy", 160]
 
 Test an attachment:
 

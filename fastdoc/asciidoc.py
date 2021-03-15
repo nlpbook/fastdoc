@@ -176,7 +176,7 @@ def wrap_text_outputs(cell):
     return cell
 
 # Cell
-CODE_MAX_LEN = 80
+CODE_MAX_LEN = 81
 
 # Cell
 def check_code_len(cell):
@@ -246,7 +246,7 @@ def replace_jekylls(cell):
             return f'```asciidoc\n.{title}\n[{surro}]\n====\n{text}\n====\n```\n'
         elif len(name) != 0: return f"```asciidoc\n[{name}]\n====\n{text}\n====\n```\n"
         else:              return f"```asciidoc\n____\n{text}\n____\n```\n"
-    if _re_forgot_column.search(cell["source"]): warn("Found a non-processed block quote, please fix")
+    if _re_forgot_column.search(cell["source"]): warn("Found a non-processed block quote: ")
     cell["source"] = _re_block_notes.sub(_rep, cell["source"])
     return cell
 
@@ -284,7 +284,14 @@ def process_images(cell):
     return cell
 
 # Cell
-_re_reference = re.compile(r'<<([^>]*)>>')
+
+# Old reference style
+# _re_reference = re.compile(r'<<([^>]*)>>')
+
+# Using double square brackets is more natural and doesn't
+# mess with suntax highligting. It's also similar to tools
+# like Roam reseach
+_re_reference = re.compile(r'\[\[([^>]*)\]\]')
 
 # Cell
 def wrap_references(cell):
@@ -305,8 +312,14 @@ def extract_attachments(cell, dest):
     return cell
 
 # Cell
-_re_sidebar_title = re.compile(r'#+\s+Sidebar:\s+(.*)$', re.IGNORECASE)
-_re_end_sidebar = re.compile(r'#+\s+End sidebar', re.IGNORECASE)
+
+# This is the original implementation of sidebar delimitters
+# _re_sidebar_title = re.compile(r'#+\s+Sidebar:\s+(.*)$', re.IGNORECASE)
+# _re_end_sidebar = re.compile(r'#+\s+End sidebar', re.IGNORECASE)
+
+# We can instead use horizontal lines, which look better in markdown anyway.
+_re_sidebar_title = re.compile(r'\n*\*\*\*\*\n#+\s+(.*)$', re.IGNORECASE)
+_re_end_sidebar = re.compile(r'\*\*\*\*$', re.IGNORECASE)
 
 # Cell
 def sidebar_headers(cell):
