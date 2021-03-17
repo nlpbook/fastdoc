@@ -230,9 +230,12 @@ _re_forgot_column = re.compile("^\s*>[^:]*$", re.MULTILINE)
 # Cell
 def replace_jekylls(cell):
     block_names = {'warning':'WARNING', 'note':'NOTE', 'important':'TIP', 'tip': 'TIP', 'stop': 'WARNING',
+                   '**Warning**':'WARNING', '**Note**':'NOTE', '**TIP**':'TIP',
                    'jargon':'JARGON', 'question':'QUESTION', 'a': 'ALEXIS', 'j': 'JEREMY', 's': 'SYLVAIN'}
     def _rep(m):
         typ,text = m.groups()
+        if text.startswith('**'): text = text[3:]
+        typ = typ.replace('**', '')
         name = block_names.get(typ.lower(), typ.upper())
         if name in ['ALEXIS', 'JEREMY', 'SYLVAIN', 'JARGON', 'QUESTION']:
             title = name[0]+name[1:].lower()
@@ -349,8 +352,8 @@ def expand_include(cell):
 # Cell
 code_cell_tfms = [get_cell_meta, replace_old_jekylls, hide_input, hide_output, extract_html, deal_error,
                   remove_interrupted_pbars, wrap_text_outputs, caption_tables, check_code_len]
-md_cell_tfms = [deal_quotes, wrap_references, interpret_sidebar, sidebar_headers, add_title_level, title_to_asciidoc, deal_with_lists,
-                process_images, replace_jekylls]
+md_cell_tfms = [deal_quotes, wrap_references, interpret_sidebar, sidebar_headers, add_title_level,
+                title_to_asciidoc, deal_with_lists, replace_jekylls, process_images]
 raw_cell_tfms = [add_new_line, expand_include]
 
 # Cell

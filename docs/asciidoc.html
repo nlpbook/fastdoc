@@ -1207,6 +1207,8 @@ Warning
     <span class="n">markdown_cell</span><span class="p">(</span><span class="s2">&quot;text</span><span class="se">\n</span><span class="s2">```asciidoc</span><span class="se">\n</span><span class="s2">____</span><span class="se">\n</span><span class="s2">This is a block quote</span><span class="se">\n</span><span class="s2">____</span><span class="se">\n</span><span class="s2">```</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">))</span>
 <span class="n">test_eq</span><span class="p">(</span><span class="n">replace_jekylls</span><span class="p">(</span><span class="n">markdown_cell</span><span class="p">(</span><span class="s2">&quot;text</span><span class="se">\n</span><span class="s2">&gt; jargon: term: Some new term&quot;</span><span class="p">)),</span>
     <span class="n">markdown_cell</span><span class="p">(</span><span class="s1">&#39;text</span><span class="se">\n</span><span class="s1">```asciidoc</span><span class="se">\n</span><span class="s1">.Jargon: term</span><span class="se">\n</span><span class="s1">[NOTE]</span><span class="se">\n</span><span class="s1">====</span><span class="se">\n</span><span class="s1">Some new term</span><span class="se">\n</span><span class="s1">====</span><span class="se">\n</span><span class="s1">```</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">))</span>
+<span class="n">test_eq</span><span class="p">(</span><span class="n">replace_jekylls</span><span class="p">(</span><span class="n">markdown_cell</span><span class="p">(</span><span class="s2">&quot;.Who&#39;s that Pokemon</span><span class="se">\n</span><span class="s2">&gt; **Tip:** Some new definition&quot;</span><span class="p">)),</span>
+    <span class="n">markdown_cell</span><span class="p">(</span><span class="s2">&quot;.Who&#39;s that Pokemon</span><span class="se">\n</span><span class="s2">```asciidoc</span><span class="se">\n</span><span class="s2">[TIP]</span><span class="se">\n</span><span class="s2">====</span><span class="se">\n</span><span class="s2">Some new definition</span><span class="se">\n</span><span class="s2">====</span><span class="se">\n</span><span class="s2">```</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">))</span>
 <span class="n">test_warns</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">replace_jekylls</span><span class="p">(</span><span class="n">markdown_cell</span><span class="p">(</span><span class="s2">&quot;text</span><span class="se">\n</span><span class="s2">&gt; This is a block quote&quot;</span><span class="p">)))</span>
 </pre></div>
 
@@ -1235,7 +1237,7 @@ Warning
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="interpret_sidebar" class="doc_header"><code>interpret_sidebar</code><a href="https://github.com/fastai/fastdoc/tree/master/fastdoc/asciidoc.py#L258" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>interpret_sidebar</code>(<strong><code>cell</code></strong>)</p>
+<h4 id="interpret_sidebar" class="doc_header"><code>interpret_sidebar</code><a href="https://github.com/fastai/fastdoc/tree/master/fastdoc/asciidoc.py#L261" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>interpret_sidebar</code>(<strong><code>cell</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -1320,7 +1322,7 @@ Warning
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="process_images" class="doc_header"><code>process_images</code><a href="https://github.com/fastai/fastdoc/tree/master/fastdoc/asciidoc.py#L273" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>process_images</code>(<strong><code>cell</code></strong>)</p>
+<h4 id="process_images" class="doc_header"><code>process_images</code><a href="https://github.com/fastai/fastdoc/tree/master/fastdoc/asciidoc.py#L276" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>process_images</code>(<strong><code>cell</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -1377,7 +1379,7 @@ Warning
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="wrap_references" class="doc_header"><code>wrap_references</code><a href="https://github.com/fastai/fastdoc/tree/master/fastdoc/asciidoc.py#L298" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>wrap_references</code>(<strong><code>cell</code></strong>)</p>
+<h4 id="wrap_references" class="doc_header"><code>wrap_references</code><a href="https://github.com/fastai/fastdoc/tree/master/fastdoc/asciidoc.py#L301" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>wrap_references</code>(<strong><code>cell</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -1427,7 +1429,7 @@ Warning
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="extract_attachments" class="doc_header"><code>extract_attachments</code><a href="https://github.com/fastai/fastdoc/tree/master/fastdoc/asciidoc.py#L303" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>extract_attachments</code>(<strong><code>cell</code></strong>, <strong><code>dest</code></strong>)</p>
+<h4 id="extract_attachments" class="doc_header"><code>extract_attachments</code><a href="https://github.com/fastai/fastdoc/tree/master/fastdoc/asciidoc.py#L306" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>extract_attachments</code>(<strong><code>cell</code></strong>, <strong><code>dest</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -1508,7 +1510,7 @@ Warning
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="sidebar_headers" class="doc_header"><code>sidebar_headers</code><a href="https://github.com/fastai/fastdoc/tree/master/fastdoc/asciidoc.py#L326" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>sidebar_headers</code>(<strong><code>cell</code></strong>)</p>
+<h4 id="sidebar_headers" class="doc_header"><code>sidebar_headers</code><a href="https://github.com/fastai/fastdoc/tree/master/fastdoc/asciidoc.py#L329" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>sidebar_headers</code>(<strong><code>cell</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -1576,7 +1578,7 @@ Warning
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="add_new_line" class="doc_header"><code>add_new_line</code><a href="https://github.com/fastai/fastdoc/tree/master/fastdoc/asciidoc.py#L332" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>add_new_line</code>(<strong><code>cell</code></strong>)</p>
+<h4 id="add_new_line" class="doc_header"><code>add_new_line</code><a href="https://github.com/fastai/fastdoc/tree/master/fastdoc/asciidoc.py#L335" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>add_new_line</code>(<strong><code>cell</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -1625,7 +1627,7 @@ Warning
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="expand_include" class="doc_header"><code>expand_include</code><a href="https://github.com/fastai/fastdoc/tree/master/fastdoc/asciidoc.py#L341" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>expand_include</code>(<strong><code>cell</code></strong>)</p>
+<h4 id="expand_include" class="doc_header"><code>expand_include</code><a href="https://github.com/fastai/fastdoc/tree/master/fastdoc/asciidoc.py#L344" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>expand_include</code>(<strong><code>cell</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -1687,7 +1689,7 @@ Warning
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="treat_notebook" class="doc_header"><code>treat_notebook</code><a href="https://github.com/fastai/fastdoc/tree/master/fastdoc/asciidoc.py#L357" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>treat_notebook</code>(<strong><code>nb</code></strong>, <strong><code>dest</code></strong>)</p>
+<h4 id="treat_notebook" class="doc_header"><code>treat_notebook</code><a href="https://github.com/fastai/fastdoc/tree/master/fastdoc/asciidoc.py#L360" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>treat_notebook</code>(<strong><code>nb</code></strong>, <strong><code>dest</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -1731,7 +1733,7 @@ Warning
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="rep_spec_tok" class="doc_header"><code>rep_spec_tok</code><a href="https://github.com/fastai/fastdoc/tree/master/fastdoc/asciidoc.py#L367" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>rep_spec_tok</code>(<strong><code>adoc</code></strong>, <strong><code>metadata</code></strong>=<em><code>None</code></em>)</p>
+<h4 id="rep_spec_tok" class="doc_header"><code>rep_spec_tok</code><a href="https://github.com/fastai/fastdoc/tree/master/fastdoc/asciidoc.py#L370" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>rep_spec_tok</code>(<strong><code>adoc</code></strong>, <strong><code>metadata</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 
 </div>
@@ -1769,7 +1771,7 @@ Warning
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="ipython2python" class="doc_header"><code>ipython2python</code><a href="https://github.com/fastai/fastdoc/tree/master/fastdoc/asciidoc.py#L373" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>ipython2python</code>(<strong><code>adoc</code></strong>, <strong><code>metadata</code></strong>=<em><code>None</code></em>)</p>
+<h4 id="ipython2python" class="doc_header"><code>ipython2python</code><a href="https://github.com/fastai/fastdoc/tree/master/fastdoc/asciidoc.py#L376" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>ipython2python</code>(<strong><code>adoc</code></strong>, <strong><code>metadata</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 
 </div>
@@ -1824,7 +1826,7 @@ Warning
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="remove_cells" class="doc_header"><code>remove_cells</code><a href="https://github.com/fastai/fastdoc/tree/master/fastdoc/asciidoc.py#L377" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>remove_cells</code>(<strong><code>adoc</code></strong>, <strong><code>metadata</code></strong>=<em><code>None</code></em>)</p>
+<h4 id="remove_cells" class="doc_header"><code>remove_cells</code><a href="https://github.com/fastai/fastdoc/tree/master/fastdoc/asciidoc.py#L380" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>remove_cells</code>(<strong><code>adoc</code></strong>, <strong><code>metadata</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 
 </div>
@@ -1880,7 +1882,7 @@ Warning
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="clear_cells" class="doc_header"><code>clear_cells</code><a href="https://github.com/fastai/fastdoc/tree/master/fastdoc/asciidoc.py#L383" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>clear_cells</code>(<strong><code>adoc</code></strong>, <strong><code>metadata</code></strong>=<em><code>None</code></em>)</p>
+<h4 id="clear_cells" class="doc_header"><code>clear_cells</code><a href="https://github.com/fastai/fastdoc/tree/master/fastdoc/asciidoc.py#L386" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>clear_cells</code>(<strong><code>adoc</code></strong>, <strong><code>metadata</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 
 </div>
@@ -1937,7 +1939,7 @@ Warning
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="format_latex" class="doc_header"><code>format_latex</code><a href="https://github.com/fastai/fastdoc/tree/master/fastdoc/asciidoc.py#L386" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>format_latex</code>(<strong><code>adoc</code></strong>, <strong><code>metadata</code></strong>=<em><code>None</code></em>)</p>
+<h4 id="format_latex" class="doc_header"><code>format_latex</code><a href="https://github.com/fastai/fastdoc/tree/master/fastdoc/asciidoc.py#L389" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>format_latex</code>(<strong><code>adoc</code></strong>, <strong><code>metadata</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 
 </div>
@@ -2001,7 +2003,7 @@ Warning
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="format_outputs" class="doc_header"><code>format_outputs</code><a href="https://github.com/fastai/fastdoc/tree/master/fastdoc/asciidoc.py#L395" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>format_outputs</code>(<strong><code>adoc</code></strong>, <strong><code>metadata</code></strong>=<em><code>None</code></em>)</p>
+<h4 id="format_outputs" class="doc_header"><code>format_outputs</code><a href="https://github.com/fastai/fastdoc/tree/master/fastdoc/asciidoc.py#L398" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>format_outputs</code>(<strong><code>adoc</code></strong>, <strong><code>metadata</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 
 </div>
@@ -2061,7 +2063,7 @@ Warning
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="fix_quotes" class="doc_header"><code>fix_quotes</code><a href="https://github.com/fastai/fastdoc/tree/master/fastdoc/asciidoc.py#L410" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>fix_quotes</code>(<strong><code>adoc</code></strong>, <strong><code>metadata</code></strong>=<em><code>None</code></em>)</p>
+<h4 id="fix_quotes" class="doc_header"><code>fix_quotes</code><a href="https://github.com/fastai/fastdoc/tree/master/fastdoc/asciidoc.py#L413" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>fix_quotes</code>(<strong><code>adoc</code></strong>, <strong><code>metadata</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 
 </div>
@@ -2116,7 +2118,7 @@ Warning
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="fix_references" class="doc_header"><code>fix_references</code><a href="https://github.com/fastai/fastdoc/tree/master/fastdoc/asciidoc.py#L414" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>fix_references</code>(<strong><code>adoc</code></strong>, <strong><code>metadata</code></strong>=<em><code>None</code></em>)</p>
+<h4 id="fix_references" class="doc_header"><code>fix_references</code><a href="https://github.com/fastai/fastdoc/tree/master/fastdoc/asciidoc.py#L417" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>fix_references</code>(<strong><code>adoc</code></strong>, <strong><code>metadata</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 
 </div>
@@ -2171,7 +2173,7 @@ Warning
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="format_tables" class="doc_header"><code>format_tables</code><a href="https://github.com/fastai/fastdoc/tree/master/fastdoc/asciidoc.py#L417" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>format_tables</code>(<strong><code>adoc</code></strong>, <strong><code>metadata</code></strong>=<em><code>None</code></em>)</p>
+<h4 id="format_tables" class="doc_header"><code>format_tables</code><a href="https://github.com/fastai/fastdoc/tree/master/fastdoc/asciidoc.py#L420" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>format_tables</code>(<strong><code>adoc</code></strong>, <strong><code>metadata</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 
 </div>
@@ -2209,7 +2211,7 @@ Warning
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="remove_lines" class="doc_header"><code>remove_lines</code><a href="https://github.com/fastai/fastdoc/tree/master/fastdoc/asciidoc.py#L439" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>remove_lines</code>(<strong><code>text</code></strong>, <strong><code>metadata</code></strong>=<em><code>None</code></em>)</p>
+<h4 id="remove_lines" class="doc_header"><code>remove_lines</code><a href="https://github.com/fastai/fastdoc/tree/master/fastdoc/asciidoc.py#L442" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>remove_lines</code>(<strong><code>text</code></strong>, <strong><code>metadata</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 
 </div>
@@ -2271,7 +2273,7 @@ Warning
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="post_process" class="doc_header"><code>post_process</code><a href="https://github.com/fastai/fastdoc/tree/master/fastdoc/asciidoc.py#L447" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>post_process</code>(<strong><code>adoc</code></strong>, <strong><code>metadata</code></strong>=<em><code>None</code></em>)</p>
+<h4 id="post_process" class="doc_header"><code>post_process</code><a href="https://github.com/fastai/fastdoc/tree/master/fastdoc/asciidoc.py#L450" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>post_process</code>(<strong><code>adoc</code></strong>, <strong><code>metadata</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 
 </div>
@@ -2315,7 +2317,7 @@ Warning
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="add_metadata" class="doc_header"><code>add_metadata</code><a href="https://github.com/fastai/fastdoc/tree/master/fastdoc/asciidoc.py#L460" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>add_metadata</code>(<strong><code>nb</code></strong>)</p>
+<h4 id="add_metadata" class="doc_header"><code>add_metadata</code><a href="https://github.com/fastai/fastdoc/tree/master/fastdoc/asciidoc.py#L463" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>add_metadata</code>(<strong><code>nb</code></strong>)</p>
 </blockquote>
 <p>Stripping removes metadata used in the conversion.</p>
 
@@ -2347,7 +2349,7 @@ Warning
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="output_num" class="doc_header"><code>output_num</code><a href="https://github.com/fastai/fastdoc/tree/master/fastdoc/asciidoc.py#L474" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>output_num</code>(<strong><code>n</code></strong>)</p>
+<h4 id="output_num" class="doc_header"><code>output_num</code><a href="https://github.com/fastai/fastdoc/tree/master/fastdoc/asciidoc.py#L477" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>output_num</code>(<strong><code>n</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -2417,7 +2419,7 @@ Warning
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_output_width" class="doc_header"><code>get_output_width</code><a href="https://github.com/fastai/fastdoc/tree/master/fastdoc/asciidoc.py#L489" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_output_width</code>(<strong><code>name</code></strong>, <strong><code>raw</code></strong>, <strong><code>folder</code></strong>)</p>
+<h4 id="get_output_width" class="doc_header"><code>get_output_width</code><a href="https://github.com/fastai/fastdoc/tree/master/fastdoc/asciidoc.py#L492" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_output_width</code>(<strong><code>name</code></strong>, <strong><code>raw</code></strong>, <strong><code>folder</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -2448,7 +2450,7 @@ Warning
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="convert_nb" class="doc_header"><code>convert_nb</code><a href="https://github.com/fastai/fastdoc/tree/master/fastdoc/asciidoc.py#L495" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>convert_nb</code>(<strong><code>fname</code></strong>, <strong><code>dest_path</code></strong>=<em><code>'.'</code></em>, <strong><code>folder</code></strong>=<em><code>None</code></em>)</p>
+<h4 id="convert_nb" class="doc_header"><code>convert_nb</code><a href="https://github.com/fastai/fastdoc/tree/master/fastdoc/asciidoc.py#L498" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>convert_nb</code>(<strong><code>fname</code></strong>, <strong><code>dest_path</code></strong>=<em><code>'.'</code></em>, <strong><code>folder</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 <p>Convert a notebook <code>fname</code> to html file in <code>dest_path</code>.</p>
 
@@ -2536,7 +2538,7 @@ Warning
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="copy_images" class="doc_header"><code>copy_images</code><a href="https://github.com/fastai/fastdoc/tree/master/fastdoc/asciidoc.py#L524" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>copy_images</code>(<strong><code>path</code></strong>, <strong><code>dest_path</code></strong>)</p>
+<h4 id="copy_images" class="doc_header"><code>copy_images</code><a href="https://github.com/fastai/fastdoc/tree/master/fastdoc/asciidoc.py#L527" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>copy_images</code>(<strong><code>path</code></strong>, <strong><code>dest_path</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -2592,7 +2594,7 @@ Warning
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="fastdoc_convert_all" class="doc_header"><code>fastdoc_convert_all</code><a href="https://github.com/fastai/fastdoc/tree/master/fastdoc/asciidoc.py#L537" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>fastdoc_convert_all</code>(<strong><code>path</code></strong>:"Path to notebooks"=<em><code>'book'</code></em>, <strong><code>dest_path</code></strong>:"Path to generated asciidoc files"=<em><code>'../convert_book'</code></em>)</p>
+<h4 id="fastdoc_convert_all" class="doc_header"><code>fastdoc_convert_all</code><a href="https://github.com/fastai/fastdoc/tree/master/fastdoc/asciidoc.py#L540" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>fastdoc_convert_all</code>(<strong><code>path</code></strong>:"Path to notebooks"=<em><code>'book'</code></em>, <strong><code>dest_path</code></strong>:"Path to generated asciidoc files"=<em><code>'../convert_book'</code></em>)</p>
 </blockquote>
 
 </div>
