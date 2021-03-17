@@ -4,12 +4,12 @@ __all__ = ['markdown_cell', 'code_cell', 'remove_hidden_cells', 'isolate_adoc_bl
            'hide_input', 'hide_output', 'extract_html', 'split_max_len', 'deal_error', 'remove_interrupted_pbars',
            'get_cell_meta', 'caption_tables', 'TEXT_MAX_WIDTH', 'wrap_text_outputs', 'CODE_MAX_LEN', 'check_code_len',
            'deal_quotes', 'add_title_level', 'title_to_asciidoc', 'deal_with_lists', 'replace_jekylls',
-           'interpret_sidebar', 'IMAGE_CONV_MULT', 'process_images', 'wrap_references', 'extract_attachments',
-           'sidebar_headers', 'add_new_line', 'expand_include', 'code_cell_tfms', 'md_cell_tfms', 'raw_cell_tfms',
-           'treat_notebook', 'rep_spec_tok', 'ipython2python', 'remove_cells', 'clear_cells', 'format_latex',
-           'format_outputs', 'fix_quotes', 'fix_references', 'format_tables', 'remove_lines', 'post_process_tfms',
-           'post_process', 'c', 'exporter', 'add_metadata', 'output_num', 'IMAGE_OUT_MULT', 'get_output_width',
-           'convert_nb', 'copy_images', 'fastdoc_convert_all']
+           'interpret_sidebar', 'IMAGE_CONV_MULT', 'process_images', 'process_md_images', 'wrap_references',
+           'extract_attachments', 'sidebar_headers', 'add_new_line', 'expand_include', 'code_cell_tfms', 'md_cell_tfms',
+           'raw_cell_tfms', 'treat_notebook', 'rep_spec_tok', 'ipython2python', 'remove_cells', 'clear_cells',
+           'format_latex', 'format_outputs', 'fix_quotes', 'fix_references', 'format_tables', 'remove_lines',
+           'post_process_tfms', 'post_process', 'c', 'exporter', 'add_metadata', 'output_num', 'IMAGE_OUT_MULT',
+           'get_output_width', 'convert_nb', 'copy_images', 'fastdoc_convert_all']
 
 # Cell
 from .imports import *
@@ -267,7 +267,7 @@ def interpret_sidebar(cell):
     return cell
 
 # Cell
-_re_md_image = re.compile(r"^(<img\ [^>]*>)", re.MULTILINE)
+_re_html_image = re.compile(r"^(<img\ [^>]*>)", re.MULTILINE)
 
 # Cell
 IMAGE_CONV_MULT = 0.6
@@ -284,6 +284,23 @@ def process_images(cell):
         pid = f"[[{d['id']}]]\n" if 'id' in d else ""
         caption = f".{d['caption']}\n" if 'caption' in d else ""
         return f"```asciidoc\n{pid}{caption}image::{d['src']}{suff}\n```"
+    cell["source"] = _re_html_image.sub(_rep, cell["source"])
+    return cell
+
+# Cell
+_re_md_image = re.compile(r'!\[(.*)\]\((.+)\)')
+
+# Cell
+def process_md_images(cell):
+    def _rep(m):
+        text = m.groups()[0]
+        src = m.groups()[1]
+        if not os.path.exists(src): warn(f"Could not find image: {src}")
+        suff = f'["{text}"]'
+        fname = os.path.basename(src)
+        pid = f"[[{os.path.splitext(fname)[0]}]]\n"
+        caption = f".{text}\n"
+        return f"```asciidoc\n{pid}{caption}image::{src}{suff}\n```"
     cell["source"] = _re_md_image.sub(_rep, cell["source"])
     return cell
 
@@ -321,7 +338,7 @@ def extract_attachments(cell, dest):
 # _re_sidebar_title = re.compile(r'#+\s+Sidebar:\s+(.*)$', re.IGNORECASE)
 # _re_end_sidebar = re.compile(r'#+\s+End sidebar', re.IGNORECASE)
 
-# We can instead use horizontal lines, which look better in markdown anyway.
+# We can instead use horizontal lines, which looks better in markdown anyway.
 _re_sidebar_title = re.compile(r'\n*\*\*\*\*\n#+\s+(.*)$', re.IGNORECASE)
 _re_end_sidebar = re.compile(r'\*\*\*\*$', re.IGNORECASE)
 
@@ -353,7 +370,7 @@ def expand_include(cell):
 code_cell_tfms = [get_cell_meta, replace_old_jekylls, hide_input, hide_output, extract_html, deal_error,
                   remove_interrupted_pbars, wrap_text_outputs, caption_tables, check_code_len]
 md_cell_tfms = [deal_quotes, wrap_references, interpret_sidebar, sidebar_headers, add_title_level,
-                title_to_asciidoc, deal_with_lists, replace_jekylls, process_images]
+                title_to_asciidoc, deal_with_lists, replace_jekylls, process_md_images, process_images]
 raw_cell_tfms = [add_new_line, expand_include]
 
 # Cell
